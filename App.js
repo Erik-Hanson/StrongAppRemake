@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeBaseProvider, Heading, Button } from "native-base";
+import { NativeBaseProvider, Heading } from "native-base";
 import React, { useState, useEffect, useCallback } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
-
+import Footer from "./components/Footer.js"
+import {StartWorkoutButton} from "./components/Buttons.js"
 
 const Stack = createNativeStackNavigator();
 
@@ -24,8 +25,8 @@ export default function App() {
         }, 1000);
       }
       prepare();
-    } catch(err) {
-      throw(err);
+    } catch (err) {
+      throw (err);
     }
   }, []);
 
@@ -46,12 +47,6 @@ export default function App() {
     )
   }
 
-  const StartWorkoutButton = () => {
-    return (
-      <Button size="lg">Home Screen</Button>
-    )
-  }
-
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
@@ -59,8 +54,13 @@ export default function App() {
         <StartWorkoutButton></StartWorkoutButton>
         <StatusBar style="auto" />
       </View>
+      <View style={styles.footer}>
+        <Footer></Footer>
+      </View>
     </NativeBaseProvider>
   );
+
+
 }
 
 const styles = StyleSheet.create({
@@ -74,4 +74,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  footer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  }
 });
