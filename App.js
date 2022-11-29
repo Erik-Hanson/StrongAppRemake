@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeBaseProvider, Heading } from "native-base";
 import React, { useState, useEffect, useCallback } from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
-import Footer from "./components/Footer.js"
-import {StartWorkoutButton} from "./components/Buttons.js"
+import Footer from "./components/Footer.js";
+import { StartWorkoutButton } from "./components/Buttons.js";
+import { Home, History, Account } from './components/Pages.js';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,14 +51,22 @@ export default function App() {
 
   return (
     <NativeBaseProvider>
-      <View style={styles.container}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="History" component={History} />
+          <Stack.Screen name="Account" component={Account} />
+        </Stack.Navigator>
+      </NavigationContainer>
+
+      {/* <View style={styles.container}>
         <SiteHeading style={styles.heading}></SiteHeading>
         <StartWorkoutButton></StartWorkoutButton>
         <StatusBar style="auto" />
       </View>
       <View style={styles.footer}>
         <Footer></Footer>
-      </View>
+      </View> */}
     </NativeBaseProvider>
   );
 
@@ -76,9 +86,6 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
+    marginBottom: 25
   }
 });
